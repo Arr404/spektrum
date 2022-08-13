@@ -1,0 +1,1 @@
+int hanya memmiliki nilai maximal yaitu 32 bit atau 21474----- apabila melebihi nilai maka angka akan berubah sesuai dengan bit nya semisal angka 3000---- akan berubah menjadi ------------------------------------------------------------ file corrupted

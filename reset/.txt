@@ -1,0 +1,2 @@
+Command linux sangat lah banyak salah satunya adalah xxd
+merupaakn fungsi yang dapat mengubah suatu file menjadi hexdump maka dajskdsjdakdl ------------------------------------------------------------- corrupted file
