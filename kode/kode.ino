@@ -11,7 +11,12 @@ LiquidCrystal lcd_1(12, 11, 5, 4, 3, 2);
 String nilai[4] = {"", "", "", ""};
 const uint8_t analog_pins[4] = {A1, A2, A3, A4};
 int state[4] = {0,0,0,0};
-int jawab[4] = {1023,1023,1023,1023};
+String jawab[4] = {
+  "1000011101101101",
+  "1011010000000000",
+  "1001111110011001",
+  "110100000111010"};
+
 void setup()
 {
   Serial.begin(9600);
@@ -37,17 +42,24 @@ void loop()
   delay(10); // Wait for 1000 millisecond(s)
 }
 
+String encrypt(int a){
+  int b = a+1;
+  b = b*12093293;
+  String hasil = String(b,BIN);
+  return hasil;
+}
+
 String ledNilai(){
+ 
  return (nilai[0])+" "+(nilai[1])+" "+(nilai[2])+" "+(nilai[3]);
 }
 
 void checked(bool howSwitch){
   if(howSwitch){
     setRow(1);
-    if(analogRead(A0) == jawab[now]){
+    if(encrypt(analogRead(A0)) == jawab[now]){
     state[now] = 1023;
     now+=1;
-    Serial.println(now);
     for (int positionCounter = 0; positionCounter < 1; positionCounter++) {
       // scroll one position left:
       lcd_1.scrollDisplayLeft();
@@ -55,7 +67,6 @@ void checked(bool howSwitch){
       delay(150);
     }
    }else{
-      reset();
     setRow(0);
    }
     lightLed();
@@ -97,14 +108,6 @@ void getPotensio(){
   nilai[now] = hasil;
 }
 
-void reset(){
-  now=0;
-  for(int i = 0 ;i<4;i++){
-    state[i] = 0;
-    jawab[i] = 1023;
-    nilai[i] = "";
-  }
-}
 
 void lightLed(){
   
