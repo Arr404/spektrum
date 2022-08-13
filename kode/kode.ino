@@ -1,15 +1,17 @@
+  
+#include <Wire.h> 
+#include <LiquidCrystal_I2C.h>
 
-
-#include <LiquidCrystal.h>
+LiquidCrystal_I2C lcd_1(0x27,20,4);  // set the LCD address to 0x27 for a 16 chars and 2 line display
 
 int sensorValue = 0;
 int buttonPIN = 6;
 int priorstate=0;
 int now=0;
 int scrolLeft = 0;
-LiquidCrystal lcd_1(12, 11, 5, 4, 3, 2);
+//LiquidCrystal lcd_1(12, 11, 5, 4, 3, 2);
 String nilai[4] = {"", "", "", ""};
-const uint8_t analog_pins[4] = {A1, A2, A3, A4};
+const uint8_t analog_pins[4] = {8, 9, 10, 11};
 int state[4] = {0,0,0,0};
 String jawab[4] = {
   "1000011101101101",
@@ -20,7 +22,7 @@ String jawab[4] = {
 void setup()
 {
   Serial.begin(9600);
-  lcd_1.begin(16, 2); // Set up the number of columns and rows on the LCD.
+  lcd_1.begin(); // Set up the number of columns and rows on the LCD.
   pinMode(buttonPIN, INPUT);
   
   // Print a message to the LCD.
